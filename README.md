@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/rockiey/junit-integration-test.svg?branch=master)](https://travis-ci.org/rockiey/junit-integration-test)
+
 # JUnit integration test example
 
 
@@ -40,11 +42,11 @@ Some functions will be needed to support intetration test. The following parts a
 
 ### unit test the testing
 
-All unit tests are located at directory src/test. 
+All unit tests are located at directory src/test.
 
 Surefire plugin has great support for unit test.
 
-Default junit pattern for file are 
+Default junit pattern for file are
 
 * ***/Test*.java
 * ***/*Test.java
@@ -75,7 +77,7 @@ All integration test are located at directory src/test
 
 Failsafe plugin has great support for integration test.
 
-Default junit pattern for file are 
+Default junit pattern for file are
 
 * ***/IT*.java
 * ***/*IT.java
@@ -108,7 +110,7 @@ The report will be located at
 
 ### smoke integration
 
-Default junit pattern for file are 
+Default junit pattern for file are
 
 * ***/ITSmoke*.java
 
@@ -125,7 +127,7 @@ Execute only integration test by ignore unit test with following command.
 
 ### nightly integration
 
-Default junit pattern for file are 
+Default junit pattern for file are
 
 * ***/ITNightly*.java
 
@@ -142,7 +144,7 @@ Execute only integration test by ignore unit test with following command.
 
 ### weekly integration test
 
-Default junit pattern for file are 
+Default junit pattern for file are
 
 * ***/ITWeekly*.java
 
