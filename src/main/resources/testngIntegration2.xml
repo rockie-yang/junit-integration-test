@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<suite name="IntegrationSuite2" parallel="false">
-  <test name="IntegrationTest2">
-    <classes>
-      <class name="it.ITInt2"/>
-    </classes>
-  </test>
-</suite>
