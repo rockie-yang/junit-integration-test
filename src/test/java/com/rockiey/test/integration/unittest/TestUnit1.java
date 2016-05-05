@@ -18,7 +18,6 @@ public class TestUnit1 {
         logger.debug("testUnit1Fail");
         System.out.println("testUnit1Fail");
 //        org.junit.Assert.assertFalse("it will fail on purpose", true);
-//        throw new Exception("testUnit1Failed");
     }
 
 

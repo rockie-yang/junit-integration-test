@@ -28,63 +28,139 @@
 
 
     </dependencies>
+
     <profiles>
-        <!-- more profile can be added -->
-        <!-- execute with mvn test -P <profile-id> -->
+        <!-- execute with mvn verify -P smoke -->
         <profile>
-            <id>integration</id>
+            <id>smoke</id>
             <build>
                 <plugins>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-surefire-plugin</artifactId>
-                        <version>2.17</version>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>verify</goal>
+                                </goals>
+                            </execution>
+                        </executions>
                         <configuration>
+                            <!-- Specify the pattern which wanna be treated as smoke test-->
+                            <includes>
+                                <include>**/ITSmoke*.java</include>
+                            </includes>
+                            <excludes>
+                                <exclude>
+                                    **/Test*.java
+                                </exclude>
+                            </excludes>
+
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <!-- execute with mvn verify -P smoke -->
+        <profile>
+            <id>nightly</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>verify</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <!-- Specify the pattern which wanna be treated as smoke test-->
+                            <includes>
+                                <include>**/ITNightly*.java</include>
+                            </includes>
+                            <excludes>
+                                <exclude>
+                                    **/Test*.java
+                                </exclude>
+                            </excludes>
                         </configuration>
                     </plugin>
                 </plugins>
             </build>
         </profile>
 
-        <!-- only add unit test profile if want to extra control -->
-        <!-- e.g. execute only part of the unit test case manually -->
-        <!--<profile>-->
-        <!--<id>unit</id>-->
-        <!--<activation></activation>-->
-        <!--<build>-->
-        <!--<plugins>-->
-        <!--<plugin>-->
-        <!--<groupId>org.apache.maven.plugins</groupId>-->
-        <!--<artifactId>maven-surefire-plugin</artifactId>-->
-        <!--<version>2.17</version>-->
-        <!--<configuration>-->
-        <!--<suiteXmlFiles>-->
-        <!--<suiteXmlFile>-->
-        <!--./src/test/resources/testngUnit1.xml-->
-        <!--</suiteXmlFile>-->
-        <!--<suiteXmlFile>-->
-        <!--./src/test/resources/testngUnit2.xml-->
-        <!--</suiteXmlFile>-->
-        <!--</suiteXmlFiles>-->
-        <!--</configuration>-->
-        <!--</plugin>-->
-        <!--</plugins>-->
-        <!--</build>-->
-        <!--</profile>-->
+        <!-- execute with mvn verify -P weekly -->
+        <profile>
+            <id>weekly</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>verify</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <!-- Specify the pattern which wanna be treated as smoke test-->
+                            <includes>
+                                <include>**/ITWeekly*.java</include>
+                            </includes>
+                            <excludes>
+                                <exclude>
+                                    **/Test*.java
+                                </exclude>
+                            </excludes>
+
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
     </profiles>
     <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>2.17</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>test</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-failsafe-plugin</artifactId>
+                    <version>2.19.1</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>integration-test</goal>
+                                <goal>verify</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+
+                </plugin>
+            </plugins>
+        </pluginManagement>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.17</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>test</goal>
-                        </goals>
-                    </execution>
-                </executions>
                 <configuration>
 
                     <systemProperties>
@@ -106,15 +182,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <version>2.19.1</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>integration-test</goal>
-                            <goal>verify</goal>
-                        </goals>
-                    </execution>
-                </executions>
                 <configuration>
                     <includes>
                         <include>
