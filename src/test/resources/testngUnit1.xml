@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- it only used if wanna extra control -->
+<!-- e.g. only execute part of the unit test case-->
+<suite name="UnitSuite1" parallel="false">
+  <test name="UnitTest1">
+    <classes>
+      <class name="com.rockiey.test.integration.unittest.TestUnit1"/>
+      <class name="com.rockiey.test.integration.unittest.TestUnit2"/>
+    </classes>
+  </test>
+</suite>

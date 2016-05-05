@@ -1,0 +1,133 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.rockiey.test</groupId>
+    <artifactId>junit-integration-example</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <properties>
+        <skip.surefire.tests>${skipTests}</skip.surefire.tests>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+
+            <!-- Here the scope must be "compile" but not "test" -->
+            <!-- Since this project is a test project -->
+            <scope>compile</scope>
+        </dependency>
+
+
+    </dependencies>
+    <profiles>
+        <!-- more profile can be added -->
+        <!-- execute with mvn test -P <profile-id> -->
+        <profile>
+            <id>integration</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>2.17</version>
+                        <configuration>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <!-- only add unit test profile if want to extra control -->
+        <!-- e.g. execute only part of the unit test case manually -->
+        <!--<profile>-->
+        <!--<id>unit</id>-->
+        <!--<activation></activation>-->
+        <!--<build>-->
+        <!--<plugins>-->
+        <!--<plugin>-->
+        <!--<groupId>org.apache.maven.plugins</groupId>-->
+        <!--<artifactId>maven-surefire-plugin</artifactId>-->
+        <!--<version>2.17</version>-->
+        <!--<configuration>-->
+        <!--<suiteXmlFiles>-->
+        <!--<suiteXmlFile>-->
+        <!--./src/test/resources/testngUnit1.xml-->
+        <!--</suiteXmlFile>-->
+        <!--<suiteXmlFile>-->
+        <!--./src/test/resources/testngUnit2.xml-->
+        <!--</suiteXmlFile>-->
+        <!--</suiteXmlFiles>-->
+        <!--</configuration>-->
+        <!--</plugin>-->
+        <!--</plugins>-->
+        <!--</build>-->
+        <!--</profile>-->
+    </profiles>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.17</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>test</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+
+                    <systemProperties>
+                        <property>
+                            <name>log4j.configuration</name>
+                            <value>file:target/test-classes/log4j.xml</value>
+                        </property>
+                    </systemProperties>
+                    <redirectTestOutputToFile>true</redirectTestOutputToFile>
+                    <reportFormat>plain</reportFormat>
+
+                    <!--This enables to run integration test only-->
+                    <!--by skip unit test with-->
+                    <!--mvn verify -Dskip.surefire.tests-->
+                    <skipTests>${skip.surefire.tests}</skipTests>
+                </configuration>
+
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>2.19.1</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <includes>
+                        <include>
+                            **/IT*.java
+                        </include>
+                    </includes>
+                    <excludes>
+                        <exclude>
+                            **/Test*.java
+                        </exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

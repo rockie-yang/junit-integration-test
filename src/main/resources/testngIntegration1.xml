@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- suite name can not be duplicated in the project -->
+<suite name="IntegrationSuite1" parallel="false">
+  <test name="IntegrationTest1">
+    <classes>
+      <class name="it.ITInt1"/>
+    </classes>
+  </test>
+</suite>
