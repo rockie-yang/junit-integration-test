@@ -71,6 +71,42 @@ The report will be located at
 	${basedir}/target/surefire-reports
 ```
 
+Execute only specified class
+
+```bash
+    mvn test -Dtest=TestUnit1
+```
+
+Execute only specified method in a class
+
+```bash
+    mvn test -Dtest=TestUnit1#testUnit1Success
+```
+
+Execute with specified test class with regex
+
+```bash
+    mvn test -Dtest=TestUnit*
+```
+
+Execute with specified test class and method with regex
+
+```bash
+    mvn test -Dtest=TestUnit*#test*
+```
+
+Execute with multiple specified test class and method
+
+```bash
+    mvn test -Dtest=TestUnit1#testUnit1Fail,TestUnit2#unit2
+```
+
+Execute with multiple specified test class and method with regex
+
+```bash
+    mvn test -Dtest=TestUnit*#*Fail,TestUnit2*#test*
+```
+
 ## integration test
 
 All integration test are located at directory src/test
