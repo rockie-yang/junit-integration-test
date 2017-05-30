@@ -10,8 +10,47 @@
         </layout>
     </appender>
 
+    <appender name="file" class="org.apache.log4j.rolling.RollingFileAppender" >
+        <param name="threshold" value="DEBUG"/>
+        <rollingPolicy name="file"
+                       class="org.apache.log4j.rolling.TimeBasedRollingPolicy">
+            <param name="FileNamePattern"
+                   value="./target/log.%d{yyyy-MM-dd HH-mm-ss}.txt"/>
+            <param name="ActiveFileName" value="./log.log"/>
+        </rollingPolicy>
+        <layout class="org.apache.log4j.EnhancedPatternLayout" >
+            <param name="ConversionPattern"
+                   value="%d{ISO8601} %-5p - %-26.26c{1} - %m%n" />
+        </layout>
+    </appender>
+
+    <appender name="content" class="org.apache.log4j.rolling.RollingFileAppender" >
+        <param name="threshold" value="DEBUG"/>
+        <rollingPolicy name="file"
+                       class="org.apache.log4j.rolling.TimeBasedRollingPolicy">
+            <param name="FileNamePattern"
+                   value="./target/content.%d{yyyy-MM-dd HH-mm-ss}.txt"/>
+            <param name="ActiveFileName" value="./content.data"/>
+        </rollingPolicy>
+        <layout class="org.apache.log4j.EnhancedPatternLayout" >
+            <param name="ConversionPattern"
+                   value="%m%n" />
+        </layout>
+    </appender>
+
+    <!-- with additivity=false then the log will not be added to root appender-->
+    <!--https://veerasundar.com/blog/2009/08/log4j-tutorial-additivity-what-and-why/-->
+    <logger name="content" additivity="false">
+        <level value="INFO"></level>
+        <appender-ref ref="content"></appender-ref>
+    </logger>
+
+    <logger name="com.rockiey">
+        <level value="DEBUG"></level>
+        <appender-ref ref="file"></appender-ref>
+    </logger>
     <root>
-        <level value="DEBUG" />
+        <level value="WARN" />
         <appender-ref ref="console" />
     </root>
 

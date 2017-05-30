@@ -1,6 +1,7 @@
-package com.rockiey.test.integration.junit;
+package com.rockieyang.test.integration.junit;
 
 
+import com.rockieyang.test.ContentAppender;
 import org.apache.log4j.Logger;
 import org.junit.Test;
 
@@ -9,5 +10,6 @@ public class ITInt1 {
 	@Test
 	public void integration1() {
 		logger.debug("integration test 1");
+		new ContentAppender().append("This shall be only in content");
 	}
 }

@@ -1,4 +1,4 @@
-package com.rockiey.test.integration.unittest;
+package com.rockieyang.test.integration.unittest;
 
 import org.apache.log4j.Logger;
 import org.junit.Test;

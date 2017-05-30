@@ -9,3 +9,5 @@ buildNumber.properties
 .mvn/timing.properties
 .idea
 .DS_Store
+*.log
+*.data
